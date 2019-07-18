@@ -4654,7 +4654,7 @@ function _request() {
               };
             };
 
-            config.debug("uuid", config.uuid);
+            config.debug('uuid', config.uuid);
 
             next = function next() {
               for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
@@ -4696,7 +4696,7 @@ function _request() {
             _context.prev = 16;
             _context.t0 = _context["catch"](7);
 
-            if (!(config.clearOnStale && _context.t0.reason === "cache-stale")) {
+            if (!(config.clearOnStale && _context.t0.reason === 'cache-stale')) {
               _context.next = 21;
               break;
             }
