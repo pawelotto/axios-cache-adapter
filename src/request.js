@@ -1,8 +1,8 @@
-import response from './response'
 import exclude from './exclude'
 import { read } from './cache'
+import response from './response'
 
-async function request (config, req) {
+async function request(config, req) {
   config.debug('uuid', config.uuid)
 
   const next = (...args) => response(config, req, ...args)
@@ -11,12 +11,6 @@ async function request (config, req) {
   await config.invalidate(config, req)
 
   if (exclude(config, req)) {
-    return excludeFromCache()
-  }
-
-  const method = req.method.toLowerCase()
-
-  if (method === 'head' || method !== 'get') {
     return excludeFromCache()
   }
 
@@ -38,7 +32,7 @@ async function request (config, req) {
 
   // Helpers
 
-  function excludeFromCache () {
+  function excludeFromCache() {
     config.excludeFromCache = true
 
     return { config, next }

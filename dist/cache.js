@@ -4619,9 +4619,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var core_js_modules_es6_object_to_string__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es6.object.to-string */ "./node_modules/core-js/modules/es6.object.to-string.js");
 /* harmony import */ var core_js_modules_es6_object_to_string__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_object_to_string__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _response__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./response */ "./src/response.js");
-/* harmony import */ var _exclude__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./exclude */ "./src/exclude.js");
-/* harmony import */ var _cache__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./cache */ "./src/cache.js");
+/* harmony import */ var _exclude__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./exclude */ "./src/exclude.js");
+/* harmony import */ var _cache__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./cache */ "./src/cache.js");
+/* harmony import */ var _response__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./response */ "./src/response.js");
 
 
 
@@ -4641,7 +4641,7 @@ function _request() {
   _request = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee(config, req) {
-    var next, method, res, excludeFromCache;
+    var next, res, excludeFromCache;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -4654,14 +4654,14 @@ function _request() {
               };
             };
 
-            config.debug('uuid', config.uuid);
+            config.debug("uuid", config.uuid);
 
             next = function next() {
               for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
                 args[_key] = arguments[_key];
               }
 
-              return _response__WEBPACK_IMPORTED_MODULE_2__["default"].apply(void 0, [config, req].concat(args));
+              return _response__WEBPACK_IMPORTED_MODULE_4__["default"].apply(void 0, [config, req].concat(args));
             }; // run invalidate function to check if any cache items need to be invalidated.
 
 
@@ -4669,7 +4669,7 @@ function _request() {
             return config.invalidate(config, req);
 
           case 5:
-            if (!Object(_exclude__WEBPACK_IMPORTED_MODULE_3__["default"])(config, req)) {
+            if (!Object(_exclude__WEBPACK_IMPORTED_MODULE_2__["default"])(config, req)) {
               _context.next = 7;
               break;
             }
@@ -4677,21 +4677,11 @@ function _request() {
             return _context.abrupt("return", excludeFromCache());
 
           case 7:
-            method = req.method.toLowerCase();
-
-            if (!(method === 'head' || method !== 'get')) {
-              _context.next = 10;
-              break;
-            }
-
-            return _context.abrupt("return", excludeFromCache());
+            _context.prev = 7;
+            _context.next = 10;
+            return Object(_cache__WEBPACK_IMPORTED_MODULE_3__["read"])(config, req);
 
           case 10:
-            _context.prev = 10;
-            _context.next = 13;
-            return Object(_cache__WEBPACK_IMPORTED_MODULE_4__["read"])(config, req);
-
-          case 13:
             res = _context.sent;
             res.config = req;
             res.request = {
@@ -4702,30 +4692,30 @@ function _request() {
               next: res
             });
 
-          case 19:
-            _context.prev = 19;
-            _context.t0 = _context["catch"](10);
+          case 16:
+            _context.prev = 16;
+            _context.t0 = _context["catch"](7);
 
-            if (!(config.clearOnStale && _context.t0.reason === 'cache-stale')) {
-              _context.next = 24;
+            if (!(config.clearOnStale && _context.t0.reason === "cache-stale")) {
+              _context.next = 21;
               break;
             }
 
-            _context.next = 24;
+            _context.next = 21;
             return config.store.removeItem(config.uuid);
 
-          case 24:
+          case 21:
             return _context.abrupt("return", {
               config: config,
               next: next
             });
 
-          case 25:
+          case 22:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[10, 19]]);
+    }, _callee, null, [[7, 16]]);
   }));
   return _request.apply(this, arguments);
 }
